@@ -1,13 +1,30 @@
-const { Schema, model } = require('mongoose')
-const Joi = require("joi")
-
+const { Schema, model } = require('mongoose');
+const Joi = require('joi');
 
 const productSchema = Schema({
     category: String,
     model: String,
-    cards: String,
+    cards: {
+        public_id: {
+            type: String,
+            required: true,
+        },
+        url: {
+            type: String,
+            required: true,
+        },
+    },
     cardImg: [
-        String
+        {
+            public_id: {
+                type: String,
+                required: true,
+            },
+            url: {
+                type: String,
+                required: true,
+            }
+        },
     ],
     brand: String,
     price: Number,
@@ -17,16 +34,13 @@ const productSchema = Schema({
     count: Number,
     discount: Number,
     discription: String,
-    characteristics: {}
-
-
-})
-
+    characteristics: {},
+});
 
 const joiSchema = Joi.object({
     category: Joi.string().min(3).max(30),
     model: Joi.string().min(3).max(60),
-    cards: Joi.string(),
+    cards: Joi.object(),
     cardImg: Joi.array(),
     brand: Joi.string().min(2).max(30),
     price: Joi.number(),
@@ -37,9 +51,8 @@ const joiSchema = Joi.object({
     discount: Joi.number(),
     discription: Joi.string().min(2).max(2000),
     characteristics: Joi.object(),
-})
+});
 
+const Product = model('product', productSchema);
 
-const Product = model("product", productSchema)
-
-module.exports = { Product, joiSchema }
+module.exports = { Product, joiSchema };

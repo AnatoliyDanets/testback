@@ -1,5 +1,6 @@
 const express = require('express')
 const logger = require('morgan')
+const bodyParser = require('body-parser');
 const cors = require('cors')
 require('dotenv').config()
 
@@ -11,6 +12,11 @@ const app = express()
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
 app.use(logger(formatsLogger))
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  limit: '100mb',
+  extended: true
+}));
 app.use(cors())
 app.use(express.json())
 
@@ -26,5 +32,3 @@ app.use((err, req, res, next) => {
 })
 
 module.exports = app
-///log-owsdoc
-///pas- mongodb3108
