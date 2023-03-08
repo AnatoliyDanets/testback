@@ -1,6 +1,7 @@
 const { Product, joiSchema } = require("./product")
 const { Order, joiOrderSchema } = require('./order')
-module.exports = { Product, Order, joiSchema, joiOrderSchema }
+const { User } = require("./user")
+module.exports = { Product, Order, User, joiSchema, joiOrderSchema }
 
 
 

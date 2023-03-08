@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 require('dotenv').config()
 
+const authRouter = require("./routes/api/auth");
 const productsRouter = require('./routes/api/products')
 const ordersRouter = require('./routes/api/orders')
 
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 app.use(cors())
 app.use(express.json())
 
+app.use('/api/auth', authRouter)
 app.use('/api/products', productsRouter)
 app.use('/api/orders', ordersRouter)
 

@@ -1,5 +1,6 @@
 const express = require('express')
 const { NotFound, BadRequest } = require('http-errors')
+const { authenticate } = require("../../middlewares")
 const Joi = require('joi')
 const { Order, joiOrderSchema } = require('../../model')
 const router = express.Router()
@@ -45,7 +46,7 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", authenticate, async (req, res, next) => {
     try {
         const { id } = req.params;
         const removeOrder = await Bank.findByIdAndRemove(id);
@@ -58,7 +59,7 @@ router.delete("/:id", async (req, res, next) => {
     }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", authenticate, async (req, res, next) => {
     try {
         const { id } = req.params;
         const updateOrder = await Order.findByIdAndUpdate(id, req.body, {
@@ -77,7 +78,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 
-router.patch("/:id", async (req, res, next) => {
+router.patch("/:id", authenticate, async (req, res, next) => {
     try {
         const { id } = req.params;
         const updateOrder = await Bank.findByIdAndUpdate(id, req.body, {

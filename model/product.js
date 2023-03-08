@@ -33,8 +33,13 @@ const productSchema = Schema({
     height: Number,
     count: Number,
     discount: Number,
+    discount_time: Number,
     discription: String,
     characteristics: {},
+    // owner: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'user',
+    // }
 });
 
 const joiSchema = Joi.object({
@@ -49,6 +54,7 @@ const joiSchema = Joi.object({
     height: Joi.number(),
     count: Joi.number(),
     discount: Joi.number(),
+    discount_time: Joi.number(),
     discription: Joi.string().min(2).max(2000),
     characteristics: Joi.object(),
 });
