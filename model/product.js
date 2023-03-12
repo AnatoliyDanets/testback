@@ -2,8 +2,8 @@ const { Schema, model } = require('mongoose');
 const Joi = require('joi');
 
 const productSchema = Schema({
-    category: String,
-    model: String,
+    category: {},
+    model: {},
     cards: {
         public_id: {
             type: String,
@@ -34,7 +34,7 @@ const productSchema = Schema({
     count: Number,
     discount: Number,
     discount_time: Number,
-    discription: String,
+    discription: {},
     characteristics: {},
     // owner: {
     //     type: Schema.Types.ObjectId,
@@ -43,8 +43,8 @@ const productSchema = Schema({
 });
 
 const joiSchema = Joi.object({
-    category: Joi.string().min(3).max(30),
-    model: Joi.string().min(3).max(60),
+    category: Joi.object(),
+    model: Joi.object(),
     cards: Joi.object(),
     cardImg: Joi.array(),
     brand: Joi.string().min(2).max(30),
@@ -55,7 +55,7 @@ const joiSchema = Joi.object({
     count: Joi.number(),
     discount: Joi.number(),
     discount_time: Joi.number(),
-    discription: Joi.string().min(2).max(2000),
+    discription: Joi.object(),
     characteristics: Joi.object(),
 });
 
